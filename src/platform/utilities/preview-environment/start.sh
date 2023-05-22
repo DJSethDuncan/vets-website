@@ -62,10 +62,11 @@ npm run build -- --buildtype=localhost --api=vets-api-web:3004 --host=localhost 
 
 # Serve the content-build
 echo "Staging drupal cache"
+cd ..
 mkdir -p content-build/.cache/localhost/drupal
 tar -xf vagovprod_dd03cdd3eb98417b247b1a61d54651a1.tar.bz2 -C content-build/.cache/localhost/drupal
 echo "Change directory to content build"
-cd ../content-build
+cd content-build
 echo "Copy environment setup and start yarn install"
 cp .env.example .env && yarn install --production=false
 #echo "Fetch drupal cache"
