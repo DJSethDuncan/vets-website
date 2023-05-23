@@ -48,11 +48,11 @@ fi
 # echo "untar the build into content-build/build/localhost/"
 # tar -xf vagovprod.tar.bz2 -C content-build/build/localhost/
 
+# Configure yarn to be able to install dependencies with fewer issues
 echo "set yarn to allow self-signed cert for install"
 yarn config set "strict-ssl" false
 
 # Build and watch vets-website
-# customAPI=http://vets-api-web:3004
 echo "Install and build vets-website with custom api (hardcoded)"
 cd vets-website
 echo "Starting yarn install"
@@ -61,6 +61,7 @@ echo "Starting npm build"
 npm run build -- --buildtype=localhost --api=vets-api-web:3004 --host=localhost --port=3001
 
 # Serve the content-build
+echo "Start content-build deploy"
 echo "Staging drupal cache"
 cd ..
 mkdir -p content-build/.cache/localhost/drupal
@@ -69,8 +70,6 @@ echo "Change directory to content build"
 cd content-build
 echo "Copy environment setup and start yarn install"
 cp .env.example .env && yarn install --production=false
-#echo "Fetch drupal cache"
-#npm run fetch-drupal-cache
 echo "Build content-build with custom api (hardcoded)"
 npm run build -- --buildtype=localhost --use-cached-assets --api=vets-api-web:3004 --host=localhost --port=3002
 echo "Serve up content-build"
