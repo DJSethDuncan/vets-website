@@ -15,15 +15,14 @@
         --accept="VA*.cer" \
         http://aia.pki.va.gov/PKI/AIA/VA/
     
-    shopt -s nullglob
-    for cert in *.@(cer|pem)
+    for cert in *
     do
         # the aim is to check what the input file/namestring we are processing
         echo "[[ PROCESSING:${cert} ]]"
-        if file "${cert}" | grep 'PEM'
+        if file ${cert} | grep 'PEM'
         then
             cp "${cert}" "${cert}.crt"
-            # the aim is to check what the inmput file/namestring we are processing
+            # the aim is to check what the input file/namestring we are processing
             echo "[[ COPY: ${cert}.crt (from ${cert})]]"
         else
             openssl x509 -in "${cert}" -inform der -outform pem -out "${cert}.crt"
