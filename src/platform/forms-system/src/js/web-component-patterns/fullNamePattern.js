@@ -79,7 +79,6 @@ const fullNameUI = (formatTitle, uiOptions = {}) => {
       'ui:options': {
         widgetClassNames: 'form-select-medium',
         uswds: true,
-        width: 'sm',
         ...uiOptions,
       },
     },
