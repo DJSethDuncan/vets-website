@@ -1,11 +1,9 @@
 import { getAppUrl } from '@department-of-veterans-affairs/platform-utilities';
 
-const createRootElement = async () => {
+const createRootElement = () => {
   const el = document.createElement('div');
   el.setAttribute('data-widget-type', 'priority-group-alert');
-  await cy.document().then(document => {
-    document.body.appendChild(el);
-  });
+  return el;
 };
 
 const enableFeature = (enabled = true) => {
@@ -30,12 +28,10 @@ const setEnrollmentStatus = (data = false) => {
 };
 
 describe('Priority Group Alert Widget', () => {
-  beforeEach(() => createRootElement());
-
   it('renders <PactAct /> when feature is disabled', () => {
-    enableFeature(false);
-    cy.visit(getAppUrl('/health-care/eligibility/priority-groups'));
-    createRootElement();
+    enableFeature({ enabled: false });
+    cy.visit('/health-care/eligibility/priority-groups');
+    // cy.document().then(doc => doc.body.appendChild(createRootElement()));
     cy.findByText(/The PACT Act expands benefits for Veterans/);
     cy.axeCheck();
   });
