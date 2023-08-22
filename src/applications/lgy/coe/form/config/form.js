@@ -1,3 +1,6 @@
+// import React from 'react';
+// import PropTypes from 'prop-types';
+
 import preSubmitInfo from 'platform/forms/preSubmitInfo';
 import FormFooter from 'platform/forms/components/FormFooter';
 import environment from 'platform/utilities/environment';
@@ -8,7 +11,8 @@ import { GetFormHelp } from '../components/GetFormHelp';
 import manifest from '../manifest.json';
 import { customCOEsubmit } from './helpers';
 import { definitions } from './schemaImports';
-
+import AllLoans from '../components/AllLoans';
+import AddLoan from '../components/AddLoan';
 // chapter schema imports
 import { applicantInformation } from './chapters/applicant';
 
@@ -19,7 +23,7 @@ import {
 
 import { serviceStatus, serviceHistory } from './chapters/service';
 
-import { loanScreener, loanHistory } from './chapters/loans';
+import { loanScreener } from './chapters/loans';
 
 import { fileUpload } from './chapters/documents';
 
@@ -121,12 +125,37 @@ const formConfig = {
           uiSchema: loanScreener.uiSchema,
           schema: loanScreener.schema,
         },
+        // loanHistory: {
+        //   path: 'loan-history',
+        //   title: 'VA-backed loan history',
+        //   uiSchema: loanHistory.uiSchema,
+        //   schema: loanHistory.schema,
+        //   depends: formData => formData?.vaLoanIndicator,
+        // },
         loanHistory: {
           path: 'loan-history',
           title: 'VA-backed loan history',
-          uiSchema: loanHistory.uiSchema,
-          schema: loanHistory.schema,
+          uiSchema: {},
+          schema: {
+            type: 'object',
+            properties: {},
+          },
           depends: formData => formData?.vaLoanIndicator,
+          CustomPage: AllLoans,
+          CustomPageReview: null,
+        },
+        addLoan: {
+          path: 'add-va-loan',
+          title: 'Add New VA-backed loan',
+          uiSchema: {},
+          schema: {
+            type: 'object',
+            properties: {},
+          },
+          CustomPage: AddLoan,
+          CustomPageReview: null,
+          depends: formData => formData?.vaLoanIndicator,
+          returnUrl: '/loan-history',
         },
       },
     },

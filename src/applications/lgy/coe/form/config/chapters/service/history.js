@@ -1,3 +1,4 @@
+import React from 'react';
 import ServicePeriodView from 'platform/forms/components/ServicePeriodView';
 import dateRangeUI from 'platform/forms-system/src/js/definitions/dateRange';
 
@@ -25,6 +26,11 @@ export const uiSchema = {
       },
       serviceBranch: {
         'ui:title': 'Branch of service',
+        'ui:description': <div id="service-branch">TEST</div>,
+        'ui:options': {
+          // widgetClassNames: 'coe-loan-input',
+          ariaDescribedby: 'va-loan-number',
+        },
       },
       dateRange: dateRangeUI(
         'Service start date',
