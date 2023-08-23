@@ -150,6 +150,7 @@ const ZipCodePage = ({
           inputmode="numeric"
           label="Zip code"
           max={99999}
+          message-aria-describedby="Zip code"
           min={0}
           name="zipCode"
           onBlur={onBlurInput}

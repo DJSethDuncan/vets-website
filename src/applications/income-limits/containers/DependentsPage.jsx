@@ -115,6 +115,7 @@ const DependentsPage = ({
           inputmode="numeric"
           label="Number of dependents"
           max={99}
+          message-aria-describedby="Number of dependents"
           min={0}
           name="numberOfDependents"
           onBlur={onBlurInput}
