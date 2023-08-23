@@ -144,6 +144,7 @@ const HealthCareContentV2 = ({
       </div>
     );
   }
+
   return (
     <div className="vads-l-row">
       <DashboardWidgetWrapper>
